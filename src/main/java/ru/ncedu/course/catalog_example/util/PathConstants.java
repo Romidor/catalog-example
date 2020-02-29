@@ -8,6 +8,6 @@ public interface PathConstants {
     String LOGIN_PATH = "/login";
     String LOGOUT_PATH = "/logout";
     String REGISTRATION_PATH = "/registration";
-
+    String JOURNEY_PATH = "/journey";
 
 }

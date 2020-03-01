@@ -25,6 +25,9 @@ public class OfferingService {
     @Inject
     private AuthorizationBean authorizationBean;
 
+    @Inject
+    private LikeService likeService;
+
     public OfferingDTO create(String name, Long price, Long category) throws CategoryNotFoundException, UnauthorizedException {
         OfferingEntity entity = new OfferingEntity();
 
@@ -43,7 +46,17 @@ public class OfferingService {
     }
 
     public List<OfferingDTO> findAll() {
-        return offeringDAO.findAll().stream().map(OfferingDTO::new).collect(Collectors.toList());
+        List<OfferingDTO> list = offeringDAO.findAll()
+                .stream()
+                .map(OfferingDTO::new)
+                .collect(Collectors.toList());
+        if (likeService.getLikes() != null) {
+            for (OfferingDTO o : list) {
+                if (likeService.getLikes().contains(o.getId()))
+                    o.setLike(true);
+            }
+        }
+        return list;
     }
 
 }

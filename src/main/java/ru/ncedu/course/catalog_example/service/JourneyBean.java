@@ -41,4 +41,7 @@ public class JourneyBean implements Serializable {
         this.userId = Optional.ofNullable(user).map(UserEntity::getId).orElse(null);
     }
 
+    public void setHistory(List<String> history) {
+        this.history = history;
+    }
 }

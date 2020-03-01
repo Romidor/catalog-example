@@ -9,5 +9,5 @@ public interface PathConstants {
     String LOGOUT_PATH = "/logout";
     String REGISTRATION_PATH = "/registration";
     String JOURNEY_PATH = "/journey";
-
+    String LIKE_PATH = "/like";
 }

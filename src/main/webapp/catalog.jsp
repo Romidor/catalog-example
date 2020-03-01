@@ -63,6 +63,21 @@
                 <li>
                     <h2><a href="/offering?id=${offering.id}">${offering.name}</a></h2>
                     for <strong>${offering.price}</strong> points
+                    <c:choose>
+                        <c:when test="${authorized == true}">
+                            <c:choose>
+                            <c:when test="${offering.like == true}">
+                               <h4>Liked!</h4>
+                            </c:when>
+                            <c:otherwise>
+                                <h4><a href="${pageContext.request.contextPath}/like?id=${offering.id}">Like!</a></h4>
+                            </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            <h5><a href="/login">Login</a> to put your like</h5>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
             </c:forEach>
         </ul>

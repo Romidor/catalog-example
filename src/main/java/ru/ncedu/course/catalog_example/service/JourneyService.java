@@ -22,4 +22,9 @@ public class JourneyService {
         journeyBean.clearHistory();
     }
 
+    public void close() {
+        journeyBean.setUserId(null);
+        journeyBean.setHistory(null);
+    }
+
 }

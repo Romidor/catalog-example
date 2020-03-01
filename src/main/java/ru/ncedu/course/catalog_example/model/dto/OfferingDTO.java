@@ -9,6 +9,7 @@ public class OfferingDTO {
     private long price;
     private CategoryDTO category;
     private UserDTO owner;
+    private boolean like;
 
     public OfferingDTO(OfferingEntity entity) {
         this.id = entity.getId();
@@ -16,6 +17,7 @@ public class OfferingDTO {
         this.price = entity.getPrice();
         this.category = new CategoryDTO(entity.getCategory());
         this.owner = new UserDTO(entity.getOwner());
+        this.like = false;
     }
 
     public Long getId() {
@@ -56,6 +58,14 @@ public class OfferingDTO {
 
     public void setOwner(UserDTO owner) {
         this.owner = owner;
+    }
+
+    public boolean isLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
     }
 
 }

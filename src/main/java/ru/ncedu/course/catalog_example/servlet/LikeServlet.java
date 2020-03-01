@@ -1,7 +1,6 @@
 package ru.ncedu.course.catalog_example.servlet;
 
 import ru.ncedu.course.catalog_example.service.LikeService;
-import ru.ncedu.course.catalog_example.service.UserService;
 import ru.ncedu.course.catalog_example.util.PathConstants;
 
 import javax.inject.Inject;
@@ -12,25 +11,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(PathConstants.LOGOUT_PATH)
-public class LogoutServlet extends HttpServlet {
+@WebServlet(PathConstants.LIKE_PATH)
+public class LikeServlet extends HttpServlet {
 
-    @Inject
-    private UserService userService;
+    private static final String OFFERING_ID_PARAM = "id";
 
     @Inject
     private LikeService likeService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        userService.logout();
-        likeService.close();
-        resp.sendRedirect(PathConstants.CATALOG_PATH);
+        long offeringId = Long.parseLong(req.getParameter(OFFERING_ID_PARAM));
+        likeService.addOffering(offeringId);
+        getServletContext().getRequestDispatcher(PathConstants.CATALOG_PATH).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        userService.logout();
+        doGet(req, resp);
     }
 
 }

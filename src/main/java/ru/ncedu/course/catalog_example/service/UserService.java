@@ -22,6 +22,9 @@ public class UserService {
     @Inject
     private AuthorizationBean authorizationBean;
 
+    @Inject
+    private JourneyBean journeyBean;
+
     private String digest(String password, String salt) {
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");

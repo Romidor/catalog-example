@@ -1,6 +1,6 @@
 package ru.ncedu.course.catalog_example.servlet;
 
-import ru.ncedu.course.catalog_example.service.JourneyBean;
+import ru.ncedu.course.catalog_example.service.JourneyService;
 import ru.ncedu.course.catalog_example.util.PathConstants;
 
 import javax.inject.Inject;
@@ -18,17 +18,17 @@ public class JourneyServlet extends HttpServlet {
     private static final String JOURNEY_JSP = "/journey.jsp";
 
     @Inject
-    private JourneyBean journeyBean;
+    private JourneyService journeyService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().setAttribute(URLS_ATTRIBUTE, journeyBean.getHistory());
+        getServletContext().setAttribute(URLS_ATTRIBUTE, journeyService.getHistory());
         getServletContext().getRequestDispatcher(JOURNEY_JSP).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        journeyBean.clearHistory();
+        journeyService.clearHistory();
         doGet(req, resp);
     }
 }

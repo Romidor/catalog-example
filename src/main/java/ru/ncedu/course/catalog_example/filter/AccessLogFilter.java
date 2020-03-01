@@ -7,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 @WebFilter(urlPatterns = {"*"})
@@ -25,7 +24,7 @@ public class AccessLogFilter implements Filter {
         if (request instanceof HttpServletRequest) {
             String url = ((HttpServletRequest)request).getRequestURL().toString();
             LOGGER.info("Client " + request.getRemoteAddr() + " opened " + url);
-            journeyBean.addRecord("new url");
+            journeyBean.addRecord(url);
         }
         chain.doFilter(request, response);
     }

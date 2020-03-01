@@ -1,26 +1,34 @@
 package ru.ncedu.course.catalog_example.service;
 
-import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-public class CustomHandler /*extends Handler*/ {
+public class CustomHandler extends Handler {
 
-    /*@Inject
-    private JourneyBean journeyBean;
+    private List<String> urls;
+
+    public CustomHandler() {
+        urls = new ArrayList<>();
+    }
+
+    public List<String> getUrls() {
+        return urls;
+    }
 
     @Override
     public void publish(LogRecord record) {
-        journeyBean.addRecord(record);
+        urls.add(record.getMessage());
     }
 
     @Override
     public void flush() {
-        journeyBean.clearHistory();
+        urls.clear();
     }
 
     @Override
     public void close() throws SecurityException {
         flush();
-    }*/
+    }
 }
